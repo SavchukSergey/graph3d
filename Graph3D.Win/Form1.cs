@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Drawing;
 using System.Drawing.Imaging;
+using System.Linq;
 using System.Threading;
 using System.Windows.Forms;
 using Graph3D.Drawing;
@@ -20,23 +21,24 @@ namespace Graph3D.Win {
         }
 
         private Scene3D _scene = new Scene3D();
-        private const int QUALITY = 150;
+        private const int QUALITY = 500;
         private readonly Canvas _canvas = new Canvas(4 * QUALITY, 3 * QUALITY);
         private readonly Graph3DEngine _engine = new RayCastingEngine();
         readonly System.Windows.Forms.Timer _timer = new System.Windows.Forms.Timer();
 
         private void Form1_Load(object sender, EventArgs e) {
             _scene = new Scene3D();
-
-            //PreciseColor color = new PreciseColor(0.6f, 0.3f, 0.3f) * 0.8f;
-            //const float shininess = 0;
-            //var b = new Box3D {
-            //    Material = { DiffuseColor = color, Shininess = shininess },
-            //    Width = 40,
-            //    Height = 40,
-            //    Depth = 120
-            //};
-            //_scene.Shapes.Add(b);
+            _scene = new VrmlToG3DConverter().Convert(@"D:\dev\graph3d\Graph3D.Vrml.Test\Ant.wrl");
+            _scene.Shapes.First().CoordinateSystem.Translate(new Vector3D(-0.2f, 0.3f, 0.2f)).Scale(2, 2, 2).RotateV(0.2f).RotateU(0.1f).Translate(new Vector3D(0, 0, -0.2f));
+            PreciseColor color = new PreciseColor(0.6f, 0.3f, 0.3f) * 0.8f;
+            const float shininess = 0;
+            var b = new Box3D {
+                Material = { DiffuseColor = color, Shininess = shininess },
+                Width = 40,
+                Height = 40,
+                Depth = 120
+            };
+            _scene.Shapes.Add(b);
 
             _scene.Shapes.Add(new Sphere3D {
                 CoordinateSystem = { Position = new Vector3D(0, 14, -2) },
@@ -45,6 +47,16 @@ namespace Graph3D.Win {
                     DiffuseColor = new PreciseColor(0.0f, 0.1f, 0.0f) * 2.99f,
                     AmbientIntensity = 0.9f,
                     Shininess = 0.1f
+                }
+            });
+
+            _scene.Shapes.Add(new Sphere3D {
+                CoordinateSystem = { Position = new Vector3D(9, 14, -2) },
+                Radius = 6.0f,
+                Material = {
+                    DiffuseColor = new PreciseColor(0.0f, 0.0f, 1.0f) * 0.19f,
+                    AmbientIntensity = 0.95f,
+                    Shininess = 0.05f
                 }
             });
 

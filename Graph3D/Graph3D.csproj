@@ -44,6 +44,7 @@
     <Compile Include="Drawing\Canvas.cs" />
     <Compile Include="Math\CoordinateSystem.cs" />
     <Compile Include="Drawing\PreciseColor.cs" />
+    <Compile Include="Math\Vector2D.cs" />
     <Compile Include="Math\Rnd.cs" />
     <Compile Include="Math\Vector3D.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

@@ -46,6 +46,7 @@
   <ItemGroup>
     <Compile Include="Drawing\PreciseColorTest.cs" />
     <Compile Include="Math\CoordinateSystemTest.cs" />
+    <Compile Include="Math\Vector3DTest.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -38,11 +38,11 @@ namespace Graph3D.Math {
                 U = new Vector3D(c11, c12, c13),
                 V = new Vector3D(c21, c22, c23),
                 W = new Vector3D(c31, c32, c33),
-                Position = {
-                    X = -(Position.X * c11 + Position.Y * c21 + Position.Z * c31),
-                    Y = -(Position.X * c12 + Position.Y * c22 + Position.Z * c32),
-                    Z = -(Position.X * c13 + Position.Y * c23 + Position.Z * c33)
-                }
+                Position = new Vector3D(
+                    -(Position.X * c11 + Position.Y * c21 + Position.Z * c31),
+                    -(Position.X * c12 + Position.Y * c22 + Position.Z * c32),
+                    -(Position.X * c13 + Position.Y * c23 + Position.Z * c33)
+                )
             };
             return cs;
         }
@@ -72,6 +72,11 @@ namespace Graph3D.Math {
             return res;
         }
 
+        public CoordinateSystem Translate(Vector3D delta) {
+            Position += delta;
+            return this;
+        }
+
         public void RotateW(float angle) {
             var sa = (float)System.Math.Sin(angle);
             var ca = (float)System.Math.Cos(angle);
@@ -81,22 +86,24 @@ namespace Graph3D.Math {
             V = nv;
         }
 
-        public void RotateV(float angle) {
+        public CoordinateSystem RotateV(float angle) {
             var sa = (float)System.Math.Sin(angle);
             var ca = (float)System.Math.Cos(angle);
             var nw = W * ca + U * sa;
             var nu = U * ca - W * sa;
             W = nw;
             U = nu;
+            return this;
         }
 
-        public void RotateU(float angle) {
+        public CoordinateSystem RotateU(float angle) {
             var sa = (float)System.Math.Sin(angle);
             var ca = (float)System.Math.Cos(angle);
             var nv = V * ca + W * sa;
             var nw = W * ca - V * sa;
             V = nv;
             W = nw;
+            return this;
         }
 
         protected float CalcDet() {
@@ -113,10 +120,11 @@ namespace Graph3D.Math {
 
         public Vector3D W;
 
-        public void Scale(float x, float y, float z) {
+        public CoordinateSystem Scale(float x, float y, float z) {
             U = U * x;
             V = V * y;
             W = W * z;
+            return this;
         }
 
         public void Shift(float x, float y, float z) {

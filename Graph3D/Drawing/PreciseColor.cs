@@ -5,35 +5,36 @@ namespace Graph3D.Drawing {
     [DebuggerDisplay("Red: {Red}, Green: {Green}, Blue: {Blue}")]
     public struct PreciseColor {
 
+        private readonly float _red;
+        private readonly float _green;
+        private readonly float _blue;
+
         [DebuggerStepThrough]
         public PreciseColor(float red, float green, float blue) {
-            _red = red > 0 ? red : 0;
-            _green = green > 0 ? green : 0;
-            _blue = blue > 0 ? blue : 0;
+            _red = red;
+            _green = green;
+            _blue = blue;
         }
 
-        private float _red;
+        public PreciseColor(Color clr) {
+            _red = clr.R / 255f;
+            _green = clr.G / 255f;
+            _blue = clr.B / 255f;
+        }
+
         public float Red {
             [DebuggerStepThrough]
             get { return _red; }
-            [DebuggerStepThrough]
-            set { _red = value > 0 ? value : 0; }
         }
 
-        private float _green;
         public float Green {
             [DebuggerStepThrough]
             get { return _green; }
-            [DebuggerStepThrough]
-            set { _green = value > 0 ? value : 0; }
         }
 
-        private float _blue;
         public float Blue {
             [DebuggerStepThrough]
             get { return _blue; }
-            [DebuggerStepThrough]
-            set { _blue = value > 0 ? value : 0; }
         }
 
         [DebuggerStepThrough]
@@ -46,11 +47,48 @@ namespace Graph3D.Drawing {
             return new PreciseColor(color._red * multiplier, color._green * multiplier, color._blue * multiplier);
         }
 
+        public static bool operator ==(PreciseColor a, PreciseColor b) {
+            return a._red == b._red && a._green == b._green && a._blue == b._blue;
+        }
+
+        public static bool operator !=(PreciseColor a, PreciseColor b) {
+            return a._red != b._red || a._green != b._green || a._blue != b._blue;
+        }
+
         public Color ToColor() {
-            var red = _red > 0 ? (_red < 1.0 ? (byte)(_red * 255) : 255) : 0;
-            var green = _green > 0 ? (_green < 1.0 ? (byte)(_green * 255) : 255) : 0;
-            var blue = _blue > 0 ? (_blue < 1.0 ? (byte)(_blue * 255) : 255) : 0;
-            return Color.FromArgb(red, green, blue);
+            var r = _red;
+            var g = _green;
+            var b = _blue;
+
+            if (r > 1) r = 1;
+            else if (r < 0) r = 0;
+
+            if (g > 1) g = 1;
+            else if (g < 0) g = 0;
+
+            if (b > 1) b = 1;
+            else if (b < 0) b = 0;
+
+            return Color.FromArgb((int)(r * 255), (int)(g * 255), (int)(b * 255));
+        }
+
+        public override int GetHashCode() {
+            unchecked {
+                var hashCode = _red.GetHashCode();
+                hashCode = (hashCode * 397) ^ _green.GetHashCode();
+                hashCode = (hashCode * 397) ^ _blue.GetHashCode();
+                return hashCode;
+            }
+        }
+
+
+        public override bool Equals(object obj) {
+            var other = (PreciseColor)obj;
+            return (_red == other._red) && (_green == other._green) && (_blue == other._blue);
+        }
+
+        public bool Equals(PreciseColor other) {
+            return (_red == other._red) && (_green == other._green) && (_blue == other._blue);
         }
 
     }

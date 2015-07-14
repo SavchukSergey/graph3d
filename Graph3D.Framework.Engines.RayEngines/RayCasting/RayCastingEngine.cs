@@ -64,16 +64,15 @@ namespace Graph3D.Framework.Engines.RayEngines.RayCasting {
             double alpha = alpha0, beta = beta0;
 
             var ray = new ColoredRay3D();
-            Vector3D dir = new Vector3D();
-            dir.Z = (float)camera.FocusDistance;
+            var dirZ = (float)camera.FocusDistance;
             for (int cy = 0; cy < canvas.Height; cy++) {
-                dir.Y = (float)(System.Math.Tan(beta) * camera.FocusDistance);
+                var dirY = (float)(System.Math.Tan(beta) * camera.FocusDistance);
                 for (int cx = 0; cx < canvas.Width; cx++) {
-                    dir.X = (float)(System.Math.Tan(alpha) * camera.FocusDistance);
+                    var dirX = (float)(System.Math.Tan(alpha) * camera.FocusDistance);
 
                     ray.Color = new PreciseColor(1.0f, 1.0f, 1.0f);
                     ray.Start = new Vector3D(camera.Position.X, camera.Position.Y, camera.Position.Z - (float)camera.FocusDistance);
-                    ray.End = ray.Start + dir;
+                    ray.End = ray.Start + new Vector3D(dirX, dirY, dirZ);
                     PreciseColor color = ProcessRay(ray, scene, 0);
                     canvas[cx, cy] += color;
                     alpha += dAlpha;

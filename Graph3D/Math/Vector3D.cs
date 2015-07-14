@@ -4,7 +4,12 @@ namespace Graph3D.Math {
     [DebuggerDisplay("X: {X}, Y: {Y}, Z: {Z}")]
     public struct Vector3D {
 
+        private readonly float _x;
+        private readonly float _y;
+        private readonly float _z;
+
         private bool _lengthValid;
+        private float _length;
 
         [DebuggerStepThrough]
         public Vector3D(float x, float y, float z) {
@@ -15,40 +20,21 @@ namespace Graph3D.Math {
             _lengthValid = false;
         }
 
-        private float _x;
         public float X {
             [DebuggerStepThrough]
             get { return _x; }
-            [DebuggerStepThrough]
-            set {
-                _x = value;
-                _lengthValid = false;
-            }
         }
 
-        private float _y;
         public float Y {
             [DebuggerStepThrough]
             get { return _y; }
-            [DebuggerStepThrough]
-            set {
-                _y = value;
-                _lengthValid = false;
-            }
         }
 
-        private float _z;
         public float Z {
             [DebuggerStepThrough]
             get { return _z; }
-            [DebuggerStepThrough]
-            set {
-                _z = value;
-                _lengthValid = false;
-            }
         }
 
-        private float _length;
         public float Length {
             get {
                 if (!_lengthValid) {

@@ -55,11 +55,11 @@ namespace Graph3D.Framework.Engines.RayEngines.RayTracing {
         protected override void Render(REScene scene, Camera3D camera, Canvas canvas) {
             foreach (REBaseLight lightSource in scene.Lights) {
                 var start = lightSource.Origin.CoordinateSystem.Position;
-                var dir = new Vector3D() {
-                    X = (float)(_rnd.NextDouble() * 2 - 1),
-                    Y = (float)(_rnd.NextDouble() * 2 - 1),
-                    Z = (float)(_rnd.NextDouble() * 2 - 1),
-                }.Normalize();
+                var dir = new Vector3D(
+                    (float)(_rnd.NextDouble() * 2 - 1),
+                    (float)(_rnd.NextDouble() * 2 - 1),
+                    (float)(_rnd.NextDouble() * 2 - 1)
+                ).Normalize();
                 var ray = new ColoredRay3D {
                     Color = new PreciseColor(1, 1, 1),
                     Start = start,

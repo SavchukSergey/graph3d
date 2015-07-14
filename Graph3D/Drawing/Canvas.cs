@@ -1,4 +1,6 @@
-﻿namespace Graph3D.Drawing {
+﻿using System.Drawing;
+
+namespace Graph3D.Drawing {
     public class Canvas {
 
         private readonly int _width;
@@ -31,7 +33,17 @@
                     _points[y, x] = new PreciseColor();
                 }
             }
+        }
 
+        public static Canvas FromImage(Bitmap img) {
+            var res = new Canvas(img.Width, img.Height);
+            for (var y = 0; y < res.Height; y++) {
+                for (var x = 0; x < res.Width; x++) {
+                    var clr = img.GetPixel(x, y);
+                    res[x, y] = new PreciseColor(clr);
+                }
+            }
+            return res;
         }
     }
 }
