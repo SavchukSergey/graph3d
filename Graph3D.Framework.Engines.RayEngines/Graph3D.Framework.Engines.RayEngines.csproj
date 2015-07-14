@@ -1,0 +1,84 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{6B4316CB-612C-4A9E-8EB7-775075C377E4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Graph3D.Framework.Engines.RayEngines</RootNamespace>
+    <AssemblyName>Graph3D.Framework.Engines.RayEngines</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ColoredRay3D.cs" />
+    <Compile Include="Intersection.cs" />
+    <Compile Include="IntersectionList.cs" />
+    <Compile Include="Lights\REBaseLight.cs" />
+    <Compile Include="Lights\RELightComposite.cs" />
+    <Compile Include="Lights\REOmniLight.cs" />
+    <Compile Include="NearestIntersection.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Ray3DEngine.cs" />
+    <Compile Include="RayCasting\RayCastingEngine.cs" />
+    <Compile Include="RayEngineMath.cs" />
+    <Compile Include="RayTracing\RayTracingEngine.cs" />
+    <Compile Include="RenderPreparationContext.cs" />
+    <Compile Include="Shape3DDecorator.cs" />
+    <Compile Include="Shapes\REBaseShape.cs" />
+    <Compile Include="Shapes\REFlatShape.cs" />
+    <Compile Include="Shapes\RERectangle.cs" />
+    <Compile Include="Shapes\REScene.cs" />
+    <Compile Include="Shapes\REShapeComposite.cs" />
+    <Compile Include="Shapes\RESphere.cs" />
+    <Compile Include="Shapes\RETriangle.cs" />
+    <Compile Include="Shapes\SensitiveMatrix.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Graph3D.Framework\Graph3D.Framework.csproj">
+      <Project>{5849787B-8B8B-43CB-90B7-F562E8879352}</Project>
+      <Name>Graph3D.Framework</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Graph3D\Graph3D.csproj">
+      <Project>{2442A45E-4D40-4068-A6E5-C9AAF4FA3676}</Project>
+      <Name>Graph3D</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

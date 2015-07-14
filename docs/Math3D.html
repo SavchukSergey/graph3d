@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+    <style>
+        .vector {
+            border-top: solid 1px black;
+        }
+        .determinant {
+            border-left: solid 1px black;
+            border-right: solid 1px black;
+            display: inline-block;
+        }
+    </style>
+</head>
+    <body>
+        <h2>
+            Math for flat shapes like triangle or rectangle</h2>
+        <h3>
+            Given</h3>
+        <p>
+            <span class="vector">Ro</span>, <span class="vector">Dir</span> - the ray, |<span
+                                                                                            class="vector">Dir</span>| = 1</p>
+        <p>
+            <span class="vector">A,</span> <span class="vector">B</span>, <span class="vector">C</span>
+            - the triangle
+        </p>
+        <h3>
+            Equations</h3>
+        <p>
+            Ray: <span class="vector">P</span> = <span class="vector">Ro</span> + t * <span class="vector">
+                                                                                          Dir</span>
+        </p>
+        <p>
+            Triangle: <span class="vector">P</span> = <span class="vector">U</span> * u + <span
+                                                                                              class="vector">V</span> * v + <span class="vector">W</span> * w + <span class="vector">
+                                                                                                                                                                    A</span>,
+        </p>
+        <p>
+            <span class="vector">U</span> = (<span class="vector">B</span> - <span class="vector">
+                                                                                 A</span>)</p>
+        <p>
+            <span class="vector">V</span> = (<span class="vector">C</span> - <span class="vector">
+                                                                                 A</span>)</p>
+        <p>
+            <span class="vector">W</span> = <span class="vector">U</span> x <span class="vector">
+                                                                                V</span></p>
+        <p>
+            w = 0</p>
+        <p>
+            <span class="vector">D</span> = <span class="vector">P</span> - <span class="vector">
+                                                                                A</span></p>
+        <p>
+            D<sub>x</sub> = U<sub>x</sub> * u + V<sub>x</sub> * v + W<sub>x</sub> * w</p>
+        <p>
+            D<sub>y</sub> = U<sub>y</sub> * u + V<sub>y</sub> * v + W<sub>y</sub> * w</p>
+        <p>
+            D<sub>z</sub> = U<sub>z</sub> * u + V<sub>z</sub> * v + W<sub>z</sub> * w
+        </p>
+        <p>
+            det = 
+            <table class="determinant">
+                <tr>
+                    <td>U<sub>x</sub></td>
+                    <td>V<sub>x</sub></td>
+                    <td>W<sub>x</sub></td>
+                </tr>
+                <tr>
+                    <td>U<sub>y</sub></td>
+                    <td>V<sub>y</sub></td>
+                    <td>W<sub>y</sub></td>
+                </tr>
+                <tr>
+                    <td>U<sub>z</sub></td>
+                    <td>V<sub>z</sub></td>
+                    <td>W<sub>z</sub></td>
+                </tr>
+            </table>
+        </p>
+        <p>
+            det<sub>u</sub> = 
+            <table class="determinant">
+                <tr>
+                    <td>D<sub>x</sub></td>
+                    <td>V<sub>x</sub></td>
+                    <td>W<sub>x</sub></td>
+                </tr>
+                <tr>
+                    <td>D<sub>y</sub></td>
+                    <td>V<sub>y</sub></td>
+                    <td>W<sub>y</sub></td>
+                </tr>
+                <tr>
+                    <td>D<sub>z</sub></td>
+                    <td>V<sub>z</sub></td>
+                    <td>W<sub>z</sub></td>
+                </tr>
+            </table>
+            
+        </p>
+        <p>det<sub>u</sub> = <span class="vector">D</span> * (<span class="vector">V</span> x <span class="vector">W</span>)</p>
+        
+          <p>
+            det<sub>v</sub> = 
+            <table class="determinant">
+               <tr>
+                    <td>U<sub>x</sub></td>
+                    <td>D<sub>x</sub></td>
+                    <td>W<sub>x</sub></td>
+                </tr>
+                <tr>
+                    <td>U<sub>y</sub></td>
+                    <td>D<sub>y</sub></td>
+                    <td>W<sub>y</sub></td>
+                </tr>
+                <tr>
+                    <td>U<sub>z</sub></td>
+                    <td>D<sub>z</sub></td>
+                    <td>W<sub>z</sub></td>
+                </tr>
+            </table>
+            
+        </p>
+        <p>det<sub>v</sub> = <span class="vector">D</span> * (<span class="vector">W</span> x <span class="vector">U</span>)</p>
+        
+          <p>
+            det<sub>w</sub> = 
+            <table class="determinant">
+                <tr>
+                    <td>U<sub>x</sub></td>
+                    <td>V<sub>x</sub></td>
+                    <td>D<sub>x</sub></td>
+                </tr>
+                <tr>
+                    <td>U<sub>y</sub></td>
+                    <td>V<sub>y</sub></td>
+                    <td>D<sub>y</sub></td>
+                </tr>
+                <tr>
+                    <td>U<sub>z</sub></td>
+                    <td>V<sub>z</sub></td>
+                    <td>D<sub>z</sub></td>
+                </tr>
+            </table>
+            
+        </p>
+        <p>det<sub>w</sub> = <span class="vector">D</span> * (<span class="vector">U</span> x <span class="vector">V</span>)= <span class="vector">D</span> * <span class="vector">W</span></p>
+
+        <p>
+            detU D * (V x W) V x W
+        </p>
+        <p>
+            u = ---- = ----------- = D * (-----) = <span class="vector">D</span> * Tu</p>
+        <p>
+            det det det</p>
+        <p>
+            detV D * (W x U) W x U
+        </p>
+        <p>
+            v = ---- = ----------- = D * (-----) = <span class="vector">D</span> * Tv</p>
+        <p>
+            det det det</p>
+        <p>
+            detW D * (U x V) U x V
+        </p>
+        <p>
+            w = ---- = ----------- = D * (-----) = <span class="vector">D</span> * Tw</p>
+        <p>
+            det det det</p>
+        <p>
+            w = 0</p>
+        <p>
+            <span class="vector">D</span> * <span class="vector">T<sub>w</sub></span> = 0</p>
+        <p>
+            (<span class="vector">P</span> - <span class="vector">A</span>) * <span class="vector">T<sub>w</sub></span> = 0</p>
+        <p>
+            P * Tw = A * Tw</p>
+        <p>
+            (Ro + t * Dir) * T<sub>w</sub> = A * Tw</p>
+        <p>
+            t * Dir * Tw = (A - Ro) * T<sub>w</sub></p>
+        <p>
+            (<span class="vector">A</span> - <span class="vector">Ro</span>) * <span class="vector">T<sub>w</sub></span></p>
+        <p>
+            t = -===---==----</p>
+        <p>
+            <span class="vector">Dir</span> * <span class="vector">T<sub>w</sub></span></p>
+    </body>
+</html>

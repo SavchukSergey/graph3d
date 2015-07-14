@@ -1,0 +1,47 @@
+﻿#VRML V2.0 utf8
+Transform {
+  children [
+    NavigationInfo { headlight FALSE } # We'll add our own light
+
+    DirectionalLight {        # First child
+        direction 0 0 -1      # Light illuminating the scene
+    }
+
+    Transform {               # Second child - a red sphere
+      translation 3 0 1
+      children [
+        Shape {
+          geometry Sphere { radius 50.3 }
+          appearance Appearance {
+            material Material { diffuseColor 1 1 0 }   # Red
+         }
+         
+        }
+        Shape { 
+          geometry IndexedFaceSet {
+            coordIndex [ 0, 1, 3, -1, 0, 2, 3, -1 ]
+            coord Coordinate { 
+              point [ 0 0 0, 1 0 0, 1 0 -1, 0.5 1 0 ] 
+            }
+            color Color {
+              color [ 0.2 0.7 0.8, 0.5 0 0, 0.1 0.8 0.1, 0 0 0.7 ] 
+            }
+            normal Normal {
+              vector [ 0 0 1, 0 0 1, 0 0 1, 0 0 1 ] 
+            }
+            texCoord TextureCoordinate { 
+              point [ 0 0, 1 0, 1 0.4, 1 1 ]
+            }
+         }
+         appearance Appearance { 
+           material Material { transparency 0.5 }
+             texture  PixelTexture { 
+               image 2 2 1 255, 128, 128, 255 
+             }
+         }
+       }
+      ]
+    }
+
+  ] # end of children for world
+}
