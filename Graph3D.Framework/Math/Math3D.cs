@@ -12,9 +12,9 @@ namespace Graph3D.Framework.Math {
         }
 
         public static Vector3D GetReflectedVector(Vector3D origin, Vector3D normal) {
-            float cosa = -Vector3D.Scalar(origin.Normalize(), normal);
-            Vector3D n = normal * (origin.Length * cosa);
-            Vector3D a = origin + n;
+            var cosa = -Vector3D.Scalar(origin.Normalize(), normal);
+            var n = normal * (origin.Length * cosa);
+            var a = origin + n;
             return n + a;
         }
 

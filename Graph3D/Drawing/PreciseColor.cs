@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Drawing;
 
 namespace Graph3D.Drawing {
     [DebuggerDisplay("Red: {Red}, Green: {Green}, Blue: {Blue}")]
@@ -43,6 +44,13 @@ namespace Graph3D.Drawing {
         [DebuggerStepThrough]
         public static PreciseColor operator *(PreciseColor color, float multiplier) {
             return new PreciseColor(color._red * multiplier, color._green * multiplier, color._blue * multiplier);
+        }
+
+        public Color ToColor() {
+            var red = _red > 0 ? (_red < 1.0 ? (byte)(_red * 255) : 255) : 0;
+            var green = _green > 0 ? (_green < 1.0 ? (byte)(_green * 255) : 255) : 0;
+            var blue = _blue > 0 ? (_blue < 1.0 ? (byte)(_blue * 255) : 255) : 0;
+            return Color.FromArgb(red, green, blue);
         }
 
     }

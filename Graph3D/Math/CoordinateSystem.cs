@@ -16,7 +16,7 @@ namespace Graph3D.Math {
         }
 
         public CoordinateSystem ToReverse() {
-            float det = CalcDet();
+            var det = CalcDet();
 
             var u = U;
             var v = V;
@@ -34,26 +34,29 @@ namespace Graph3D.Math {
             var c32 = (w.X * u.Y - u.X * w.Y) / det;
             var c33 = (u.X * v.Y - v.X * u.Y) / det;
 
-            var cs = new CoordinateSystem();
-            cs.U = new Vector3D(c11, c12, c13);
-            cs.V = new Vector3D(c21, c22, c23);
-            cs.W = new Vector3D(c31, c32, c33);
-            cs.Position.X = -(Position.X * c11 + Position.Y * c21 + Position.Z * c31);
-            cs.Position.Y = -(Position.X * c12 + Position.Y * c22 + Position.Z * c32);
-            cs.Position.Z = -(Position.X * c13 + Position.Y * c23 + Position.Z * c33);
+            var cs = new CoordinateSystem {
+                U = new Vector3D(c11, c12, c13),
+                V = new Vector3D(c21, c22, c23),
+                W = new Vector3D(c31, c32, c33),
+                Position = {
+                    X = -(Position.X * c11 + Position.Y * c21 + Position.Z * c31),
+                    Y = -(Position.X * c12 + Position.Y * c22 + Position.Z * c32),
+                    Z = -(Position.X * c13 + Position.Y * c23 + Position.Z * c33)
+                }
+            };
             return cs;
         }
 
         public Vector3D ToRelative(Vector3D vector) {
-            Vector3D rel = vector - Position;
-            float det = CalcDet();
-            float detX = CalcDet(rel.X, V.X, W.X,
+            var rel = vector - Position;
+            var det = CalcDet();
+            var detX = CalcDet(rel.X, V.X, W.X,
                                         rel.Y, V.Y, W.Y,
                                         rel.Z, V.Z, W.Z);
-            float detY = CalcDet(U.X, rel.X, W.X,
+            var detY = CalcDet(U.X, rel.X, W.X,
                                         U.Y, rel.Y, W.Y,
                                         U.Z, rel.Z, W.Z);
-            float detZ = CalcDet(U.X, V.X, rel.X,
+            var detZ = CalcDet(U.X, V.X, rel.X,
                                         U.Y, V.Y, rel.Y,
                                         U.Z, V.Z, rel.Z);
             return new Vector3D(detX / det, detY / det, detZ / det);
@@ -72,8 +75,8 @@ namespace Graph3D.Math {
         public void RotateW(float angle) {
             var sa = (float)System.Math.Sin(angle);
             var ca = (float)System.Math.Cos(angle);
-            Vector3D nu = U * ca + V * sa;
-            Vector3D nv = V * ca - U * sa;
+            var nu = U * ca + V * sa;
+            var nv = V * ca - U * sa;
             U = nu;
             V = nv;
         }
@@ -81,8 +84,8 @@ namespace Graph3D.Math {
         public void RotateV(float angle) {
             var sa = (float)System.Math.Sin(angle);
             var ca = (float)System.Math.Cos(angle);
-            Vector3D nw = W * ca + U * sa;
-            Vector3D nu = U * ca - W * sa;
+            var nw = W * ca + U * sa;
+            var nu = U * ca - W * sa;
             W = nw;
             U = nu;
         }
@@ -90,8 +93,8 @@ namespace Graph3D.Math {
         public void RotateU(float angle) {
             var sa = (float)System.Math.Sin(angle);
             var ca = (float)System.Math.Cos(angle);
-            Vector3D nv = V * ca + W * sa;
-            Vector3D nw = W * ca - V * sa;
+            var nv = V * ca + W * sa;
+            var nw = W * ca - V * sa;
             V = nv;
             W = nw;
         }
