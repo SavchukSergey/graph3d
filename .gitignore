@@ -18,6 +18,7 @@
 
 /Graph3D.Tests/bin/
 /Graph3D.Tests/obj/
+/Graph3D.Tests/Graph3D.Tests.csproj.user
 
 /Graph3D.Vrml.Test/bin/
 /Graph3D.Vrml.Test/obj/

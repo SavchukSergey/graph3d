@@ -53,6 +53,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Graph3D.Vrml">
+      <HintPath>..\packages\Graph3D.Vrml.1.0\lib\net40\Graph3D.Vrml.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Deployment" />
@@ -85,6 +88,7 @@
     </Compile>
     <None Include="app.config" />
     <None Include="Box.wrl" />
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -104,10 +108,6 @@
     <ProjectReference Include="..\Graph3D.Framework\Graph3D.Framework.csproj">
       <Project>{CEA73E22-6A63-4B87-A6FF-8D56620B0A25}</Project>
       <Name>Graph3D.Framework</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\Graph3D.VRML\Graph3D.Vrml.csproj">
-      <Project>{A53800F0-FD71-45C4-9FC4-E2CDD7E9976F}</Project>
-      <Name>Graph3D.Vrml</Name>
     </ProjectReference>
     <ProjectReference Include="..\Graph3D\Graph3D.csproj">
       <Project>{2442A45E-4D40-4068-A6E5-C9AAF4FA3676}</Project>
