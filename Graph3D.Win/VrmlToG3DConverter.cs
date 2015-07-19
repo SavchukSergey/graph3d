@@ -25,17 +25,17 @@ namespace Graph3D.Win {
 
         public Scene3D Convert(string vrmlPath) {
             try {
-                Vrml97Tokenizer tokenizer = new Vrml97Tokenizer(File.Open(vrmlPath, FileMode.Open));
-                VrmlParser parser = new VrmlParser(tokenizer);
-                VRMLScene scene = new VRMLScene();
-                parser.parse(scene);
+                var tokenizer = new Vrml97Tokenizer(File.Open(vrmlPath, FileMode.Open));
+                var parser = new VrmlParser(tokenizer);
+                var scene = new VrmlScene();
+                parser.Parse(scene);
                 return Convert(scene);
             } catch (Exception exc) {
                 return null;
             }
         }
 
-        public Scene3D Convert(VRMLScene vrml) {
+        public Scene3D Convert(VrmlScene vrml) {
             Scene3D scene = new Scene3D();
             float[,] transformation = VrmlMath.GetUnitMatrix();
             foreach (Node node in vrml.root.children) {
@@ -95,26 +95,26 @@ namespace Graph3D.Win {
         }
 
         private Shape3D ConvertShapeNode(ShapeNode node, float[,] transformation) {
-            AppearanceNode appearance = (AppearanceNode)node.appearance.node;
-            MaterialNode material = appearance.material.node as MaterialNode;
-            if (node.geometry.node is SphereNode) {
-                SphereNode sphereNode = (SphereNode)node.geometry.node;
+            AppearanceNode appearance = (AppearanceNode)node.appearance.Node;
+            MaterialNode material = appearance.material.Node as MaterialNode;
+            if (node.geometry.Node is SphereNode) {
+                SphereNode sphereNode = (SphereNode)node.geometry.Node;
                 Sphere3D sphere = new Sphere3D();
                 //sphere.Position = new Graph3D.Framework.Math.Vector3D(0, 0, 0);
-                sphere.Radius = sphereNode.radius.value;
+                sphere.Radius = sphereNode.radius.Value;
                 SetAppearance(sphere, appearance);
                 return sphere;
             }
-            if (node.geometry.node is BoxNode) {
+            if (node.geometry.Node is BoxNode) {
                 return null;
             }
-            if (node.geometry.node is IndexedFaceSetNode) {
-                IndexedFaceSetNode faceSetNode = (IndexedFaceSetNode)node.geometry.node;
+            if (node.geometry.Node is IndexedFaceSetNode) {
+                IndexedFaceSetNode faceSetNode = (IndexedFaceSetNode)node.geometry.Node;
                 Shape3DComposite composite = new Shape3DComposite();
                 int facesCount = 0;
                 for (int i = 0; i < faceSetNode.coordIndex.length; i++)
                     if (faceSetNode.coordIndex[i] == -1) facesCount++;
-                MFVec3f coords = ((CoordinateNode)faceSetNode.coord.node).point;
+                MFVec3f coords = ((CoordinateNode)faceSetNode.coord.Node).point;
                 for (int faceOffsetIndex = 0; faceOffsetIndex < faceSetNode.coordIndex.length; faceOffsetIndex++) {
                     Triangle3D triangle;
                     triangle = new Triangle3D();
@@ -138,15 +138,15 @@ namespace Graph3D.Win {
         }
 
         private void SetAppearance(Shape3D shape, AppearanceNode appearance) {
-            shape.Material.DiffuseColor = ConvertColor(((MaterialNode)appearance.material.node).diffuseColor) * 7;
-            shape.Material.SpecularColor = ConvertColor(((MaterialNode)appearance.material.node).specularColor);
-            shape.Material.EmmisiveColor = ConvertColor(((MaterialNode)appearance.material.node).emissiveColor);
-            shape.Material.AmbientIntensity = ((MaterialNode)appearance.material.node).ambientIntensity.value;
-            shape.Material.Shininess = ((MaterialNode)appearance.material.node).shininess.value;
+            shape.Material.DiffuseColor = ConvertColor(((MaterialNode)appearance.material.Node).diffuseColor) * 7;
+            shape.Material.SpecularColor = ConvertColor(((MaterialNode)appearance.material.Node).specularColor);
+            shape.Material.EmmisiveColor = ConvertColor(((MaterialNode)appearance.material.Node).emissiveColor);
+            shape.Material.AmbientIntensity = ((MaterialNode)appearance.material.Node).ambientIntensity.Value;
+            shape.Material.Shininess = ((MaterialNode)appearance.material.Node).shininess.Value;
         }
 
         private PreciseColor ConvertColor(SFColor color) {
-            return new PreciseColor(color.red, color.green, color.blue);
+            return new PreciseColor(color.Red, color.Green, color.Blue);
         }
 
         private Vector3D ConvertVector3D(SFVec3f vector) {

@@ -53,8 +53,9 @@
     <CodeAnalysisRuleSet>AllRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Graph3D.Vrml">
-      <HintPath>..\packages\Graph3D.Vrml.1.0\lib\net40\Graph3D.Vrml.dll</HintPath>
+    <Reference Include="Graph3D.Vrml, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Graph3D.Vrml.1.0.1\lib\net40\Graph3D.Vrml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
