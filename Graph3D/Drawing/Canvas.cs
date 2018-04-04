@@ -3,19 +3,13 @@
 namespace Graph3D.Drawing {
     public class Canvas {
 
-        private readonly int _width;
-        public int Width {
-            get { return _width; }
-        }
+        public int Width { get; }
 
-        private readonly int _height;
-        public int Height {
-            get { return _height; }
-        }
+        public int Height { get; }
 
         public Canvas(int width, int height) {
-            _width = width;
-            _height = height;
+            Width = width;
+            Height = height;
             Clear();
         }
 
@@ -27,9 +21,9 @@ namespace Graph3D.Drawing {
 
 
         public void Clear() {
-            _points = new PreciseColor[_height, _width];
-            for (int y = 0; y < _height; y++) {
-                for (int x = 0; x < _width; x++) {
+            _points = new PreciseColor[Height, Width];
+            for (int y = 0; y < Height; y++) {
+                for (int x = 0; x < Width; x++) {
                     _points[y, x] = new PreciseColor();
                 }
             }

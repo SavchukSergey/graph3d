@@ -4,41 +4,28 @@ namespace Graph3D.Math {
     [DebuggerDisplay("X: {X}, Y: {Y}, Z: {Z}")]
     public struct Vector3D {
 
-        private readonly float _x;
-        private readonly float _y;
-        private readonly float _z;
-
         private bool _lengthValid;
         private float _length;
 
         [DebuggerStepThrough]
         public Vector3D(float x, float y, float z) {
-            _x = x;
-            _y = y;
-            _z = z;
+            X = x;
+            Y = y;
+            Z = z;
             _length = 0;
             _lengthValid = false;
         }
 
-        public float X {
-            [DebuggerStepThrough]
-            get { return _x; }
-        }
+        public readonly float X;
 
-        public float Y {
-            [DebuggerStepThrough]
-            get { return _y; }
-        }
+        public readonly float Y;
 
-        public float Z {
-            [DebuggerStepThrough]
-            get { return _z; }
-        }
+        public readonly float Z;
 
         public float Length {
             get {
                 if (!_lengthValid) {
-                    _length = (float)System.Math.Sqrt(_x * _x + _y * _y + _z * _z);
+                    _length = (float)System.Math.Sqrt(X * X + Y * Y + Z * Z);
                     _lengthValid = true;
                 }
                 return _length;
@@ -46,46 +33,47 @@ namespace Graph3D.Math {
         }
 
         [DebuggerStepThrough]
-        public static Vector3D operator -(Vector3D first, Vector3D second) {
-            return new Vector3D(first._x - second._x, first._y - second._y, first._z - second._z);
+        public static Vector3D operator -(in Vector3D first, in Vector3D second) {
+            return new Vector3D(first.X - second.X, first.Y - second.Y, first.Z - second.Z);
         }
 
         [DebuggerStepThrough]
-        public static Vector3D operator +(Vector3D first, Vector3D second) {
-            return new Vector3D(first._x + second._x, first._y + second._y, first._z + second._z);
+        public static Vector3D operator +(in Vector3D first, in Vector3D second) {
+            return new Vector3D(first.X + second.X, first.Y + second.Y, first.Z + second.Z);
         }
 
         [DebuggerStepThrough]
-        public static Vector3D operator /(Vector3D vector, float divider) {
-            return new Vector3D(vector._x / divider, vector._y / divider, vector._z / divider);
+        public static Vector3D operator /(in Vector3D vector, float divider) {
+            return new Vector3D(vector.X / divider, vector.Y / divider, vector.Z / divider);
         }
 
         [DebuggerStepThrough]
-        public static Vector3D operator *(Vector3D vector, float multiplier) {
-            return new Vector3D(vector._x * multiplier, vector._y * multiplier, vector._z * multiplier);
+        public static Vector3D operator *(in Vector3D vector, float multiplier) {
+            return new Vector3D(vector.X * multiplier, vector.Y * multiplier, vector.Z * multiplier);
         }
 
         [DebuggerStepThrough]
-        public static Vector3D operator *(float multiplier, Vector3D vector) {
-            return new Vector3D(vector._x * multiplier, vector._y * multiplier, vector._z * multiplier);
+        public static Vector3D operator *(float multiplier, in Vector3D vector) {
+            return new Vector3D(vector.X * multiplier, vector.Y * multiplier, vector.Z * multiplier);
         }
 
         [DebuggerStepThrough]
-        public static float Scalar(Vector3D first, Vector3D second) {
-            return first._x * second.X + first.Y * second.Y + first.Z * second.Z;
+        public static float Scalar(in Vector3D first, in Vector3D second) {
+            return first.X * second.X + first.Y * second.Y + first.Z * second.Z;
         }
 
         [DebuggerStepThrough]
-        public static Vector3D Product(Vector3D first, Vector3D second) {
-            float x = first._y * second._z - first._z * second._y;
-            float y = first._z * second._x - first._x * second._z;
-            float z = first._x * second._y - first._y * second._x;
+        public static Vector3D Product(in Vector3D first, in Vector3D second) {
+            float x = first.Y * second.Z - first.Z * second.Y;
+            float y = first.Z * second.X - first.X * second.Z;
+            float z = first.X * second.Y - first.Y * second.X;
             return new Vector3D(x, y, z);
         }
 
         [DebuggerStepThrough]
         public Vector3D Normalize() {
-            if (Length > 0) return this / Length;
+            var len = Length;
+            if (len > 0) return this / len;
             return this;
         }
 

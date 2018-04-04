@@ -28,7 +28,7 @@ namespace Graph3D.Win {
 
         private void Form1_Load(object sender, EventArgs e) {
             _scene = new Scene3D();
-            _scene = new VrmlToG3DConverter().Convert(@"D:\dev\graph3d\Graph3D.Vrml.Test\Ant.wrl");
+            _scene = new VrmlToG3DConverter().Convert(@"D:\github\graph3D.vrml\Graph3D.Vrml.Test\Ant.wrl");
             _scene.Shapes.First().CoordinateSystem.Translate(new Vector3D(-0.2f, 0.3f, 0.2f)).Scale(2, 2, 2).RotateV(0.2f).RotateU(0.1f).Translate(new Vector3D(0, 0, -0.2f));
             PreciseColor color = new PreciseColor(0.6f, 0.3f, 0.3f) * 0.8f;
             const float shininess = 0;

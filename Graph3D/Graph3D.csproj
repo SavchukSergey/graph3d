@@ -2,5 +2,6 @@
 
   <PropertyGroup>
     <TargetFramework>net461</TargetFramework>
+    <LangVersion>latest</LangVersion>
   </PropertyGroup>
 </Project>

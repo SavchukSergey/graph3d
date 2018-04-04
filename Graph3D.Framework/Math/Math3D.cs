@@ -11,7 +11,7 @@ namespace Graph3D.Framework.Math {
             return a11 * (a22 * a33 - a23 * a32) - a12 * (a21 * a33 - a23 * a31) + a13 * (a21 * a32 - a22 * a31);
         }
 
-        public static Vector3D GetReflectedVector(Vector3D origin, Vector3D normal) {
+        public static Vector3D GetReflectedVector(in Vector3D origin, in Vector3D normal) {
             var cosa = -Vector3D.Scalar(origin.Normalize(), normal);
             var n = normal * (origin.Length * cosa);
             var a = origin + n;

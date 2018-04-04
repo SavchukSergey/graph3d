@@ -3,62 +3,49 @@ using System.Drawing;
 
 namespace Graph3D.Drawing {
     [DebuggerDisplay("Red: {Red}, Green: {Green}, Blue: {Blue}")]
-    public struct PreciseColor {
-
-        private readonly float _red;
-        private readonly float _green;
-        private readonly float _blue;
+    public readonly struct PreciseColor {
 
         [DebuggerStepThrough]
         public PreciseColor(float red, float green, float blue) {
-            _red = red;
-            _green = green;
-            _blue = blue;
+            Red = red;
+            Green = green;
+            Blue = blue;
         }
 
-        public PreciseColor(Color clr) {
-            _red = clr.R / 255f;
-            _green = clr.G / 255f;
-            _blue = clr.B / 255f;
+        public PreciseColor(in Color clr) {
+            Red = clr.R / 255f;
+            Green = clr.G / 255f;
+            Blue = clr.B / 255f;
         }
 
-        public float Red {
-            [DebuggerStepThrough]
-            get { return _red; }
-        }
+        public readonly float Red;
 
-        public float Green {
-            [DebuggerStepThrough]
-            get { return _green; }
-        }
+        public readonly float Green;
 
-        public float Blue {
-            [DebuggerStepThrough]
-            get { return _blue; }
+        public readonly float Blue;
+
+        [DebuggerStepThrough]
+        public static PreciseColor operator +(in PreciseColor first, in PreciseColor second) {
+            return new PreciseColor(first.Red + second.Red, first.Green + second.Green, first.Blue + second.Blue);
         }
 
         [DebuggerStepThrough]
-        public static PreciseColor operator +(PreciseColor first, PreciseColor second) {
-            return new PreciseColor(first._red + second._red, first._green + second._green, first._blue + second._blue);
+        public static PreciseColor operator *(in PreciseColor color, float multiplier) {
+            return new PreciseColor(color.Red * multiplier, color.Green * multiplier, color.Blue * multiplier);
         }
 
-        [DebuggerStepThrough]
-        public static PreciseColor operator *(PreciseColor color, float multiplier) {
-            return new PreciseColor(color._red * multiplier, color._green * multiplier, color._blue * multiplier);
+        public static bool operator ==(in PreciseColor a, in PreciseColor b) {
+            return a.Red == b.Red && a.Green == b.Green && a.Blue == b.Blue;
         }
 
-        public static bool operator ==(PreciseColor a, PreciseColor b) {
-            return a._red == b._red && a._green == b._green && a._blue == b._blue;
-        }
-
-        public static bool operator !=(PreciseColor a, PreciseColor b) {
-            return a._red != b._red || a._green != b._green || a._blue != b._blue;
+        public static bool operator !=(in PreciseColor a, in PreciseColor b) {
+            return a.Red != b.Red || a.Green != b.Green || a.Blue != b.Blue;
         }
 
         public Color ToColor() {
-            var r = _red;
-            var g = _green;
-            var b = _blue;
+            var r = Red;
+            var g = Green;
+            var b = Blue;
 
             if (r > 1) r = 1;
             else if (r < 0) r = 0;
@@ -74,9 +61,9 @@ namespace Graph3D.Drawing {
 
         public override int GetHashCode() {
             unchecked {
-                var hashCode = _red.GetHashCode();
-                hashCode = (hashCode * 397) ^ _green.GetHashCode();
-                hashCode = (hashCode * 397) ^ _blue.GetHashCode();
+                var hashCode = Red.GetHashCode();
+                hashCode = (hashCode * 397) ^ Green.GetHashCode();
+                hashCode = (hashCode * 397) ^ Blue.GetHashCode();
                 return hashCode;
             }
         }
@@ -84,11 +71,11 @@ namespace Graph3D.Drawing {
 
         public override bool Equals(object obj) {
             var other = (PreciseColor)obj;
-            return (_red == other._red) && (_green == other._green) && (_blue == other._blue);
+            return (Red == other.Red) && (Green == other.Green) && (Blue == other.Blue);
         }
 
-        public bool Equals(PreciseColor other) {
-            return (_red == other._red) && (_green == other._green) && (_blue == other._blue);
+        public bool Equals(in PreciseColor other) {
+            return (Red == other.Red) && (Green == other.Green) && (Blue == other.Blue);
         }
 
     }

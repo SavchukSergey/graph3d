@@ -8,7 +8,7 @@ using Graph3D.Math;
 namespace Graph3D.Framework.Engines.RayEngines.Lights {
     public class REOmniLight : REBaseLight {
 
-        public REOmniLight(OmniLight3D origin, Vector3D position, REScene scene)
+        public REOmniLight(OmniLight3D origin, in Vector3D position, REScene scene)
             : base(origin, scene) {
             omni = origin;
             this.position = position;

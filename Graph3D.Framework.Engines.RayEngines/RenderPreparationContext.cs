@@ -9,13 +9,10 @@ namespace Graph3D.Framework.Engines.RayEngines {
 
         [DebuggerStepThrough]
         public RenderPreparationContext(REScene scene) {
-            this.scene = scene;
+            Scene = scene;
         }
 
-        private readonly REScene scene;
-        public REScene Scene {
-            get { return scene; }
-        }
+        public REScene Scene { get; }
 
         private readonly Stack<CoordinateSystem> csystems = new Stack<CoordinateSystem>();
 
@@ -31,7 +28,7 @@ namespace Graph3D.Framework.Engines.RayEngines {
             csystems.Pop();
         }
 
-        public Vector3D ToAbsolute(Vector3D vector) {
+        public Vector3D ToAbsolute(in Vector3D vector) {
             if (csystems.Count == 0) {
                 return vector;
             } else {

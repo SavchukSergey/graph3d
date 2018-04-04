@@ -8,39 +8,21 @@ namespace Graph3D.Math {
 
         [DebuggerStepThrough]
         public Vector2D(float x, float y) {
-            _x = x;
-            _y = y;
+            X = x;
+            Y = y;
             _length = 0;
             _lengthValid = false;
         }
 
-        private float _x;
-        public float X {
-            [DebuggerStepThrough]
-            get { return _x; }
-            [DebuggerStepThrough]
-            set {
-                _x = value;
-                _lengthValid = false;
-            }
-        }
+        public readonly float X;
 
-        private float _y;
-        public float Y {
-            [DebuggerStepThrough]
-            get { return _y; }
-            [DebuggerStepThrough]
-            set {
-                _y = value;
-                _lengthValid = false;
-            }
-        }
+        public readonly float Y;
 
         private float _length;
         public float Length {
             get {
                 if (!_lengthValid) {
-                    _length = (float)System.Math.Sqrt(_x * _x + _y * _y);
+                    _length = (float)System.Math.Sqrt(X * X + Y * Y);
                     _lengthValid = true;
                 }
                 return _length;
@@ -48,33 +30,33 @@ namespace Graph3D.Math {
         }
 
         [DebuggerStepThrough]
-        public static Vector2D operator -(Vector2D first, Vector2D second) {
-            return new Vector2D(first._x - second._x, first._y - second._y);
+        public static Vector2D operator -(in Vector2D first, in Vector2D second) {
+            return new Vector2D(first.X - second.X, first.Y - second.Y);
         }
 
         [DebuggerStepThrough]
-        public static Vector2D operator +(Vector2D first, Vector2D second) {
-            return new Vector2D(first._x + second._x, first._y + second._y);
+        public static Vector2D operator +(in Vector2D first, in Vector2D second) {
+            return new Vector2D(first.X + second.X, first.Y + second.Y);
         }
 
         [DebuggerStepThrough]
-        public static Vector2D operator /(Vector2D vector, float divider) {
-            return new Vector2D(vector._x / divider, vector._y / divider);
+        public static Vector2D operator /(in Vector2D vector, float divider) {
+            return new Vector2D(vector.X / divider, vector.Y / divider);
         }
 
         [DebuggerStepThrough]
-        public static Vector2D operator *(Vector2D vector, float multiplier) {
-            return new Vector2D(vector._x * multiplier, vector._y * multiplier);
+        public static Vector2D operator *(in Vector2D vector, float multiplier) {
+            return new Vector2D(vector.X * multiplier, vector.Y * multiplier);
         }
 
         [DebuggerStepThrough]
-        public static Vector2D operator *(float multiplier, Vector2D vector) {
-            return new Vector2D(vector._x * multiplier, vector._y * multiplier);
+        public static Vector2D operator *(float multiplier, in Vector2D vector) {
+            return new Vector2D(vector.X * multiplier, vector.Y * multiplier);
         }
 
         [DebuggerStepThrough]
-        public static float Scalar(Vector2D first, Vector2D second) {
-            return first._x * second.X + first.Y * second.Y;
+        public static float Scalar(in Vector2D first, in Vector2D second) {
+            return first.X * second.X + first.Y * second.Y;
         }
 
         [DebuggerStepThrough]

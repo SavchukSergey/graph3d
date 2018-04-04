@@ -10,7 +10,7 @@ namespace Graph3D.Framework {
         }
 
         [DebuggerStepThrough]
-        protected Object3D(Vector3D position) {
+        protected Object3D(in Vector3D position) {
             CoordinateSystem = new CoordinateSystem {
                 Position = position
             };

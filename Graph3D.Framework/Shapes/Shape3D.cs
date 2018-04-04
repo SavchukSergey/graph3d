@@ -11,16 +11,11 @@ namespace Graph3D.Framework.Shapes {
         }
 
         [DebuggerStepThrough]
-        protected Shape3D(Vector3D position)
+        protected Shape3D(in Vector3D position)
             : base(position) {
         }
 
-        private Material _material = new Material();
-        public Material Material {
-            [DebuggerStepThrough]
-            get { return _material; }
-            set { _material = value; }
-        }
+        public Material Material { get; set; } = new Material();
 
         public abstract void AcceptVisitor(IShape3DVisitor visitor);
 

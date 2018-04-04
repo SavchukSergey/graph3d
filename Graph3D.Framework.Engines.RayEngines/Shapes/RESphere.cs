@@ -8,9 +8,9 @@ namespace Graph3D.Framework.Engines.RayEngines.Shapes {
 
         public RESphere(Sphere3D sphere)
             : base(sphere) {
-            _radius = sphere.Radius;
-            _radius2 = sphere.Radius * sphere.Radius;
-            _position = sphere.CoordinateSystem.Position;
+            Radius = sphere.Radius;
+            Radius2 = sphere.Radius * sphere.Radius;
+            Position = sphere.CoordinateSystem.Position;
         }
 
 
@@ -18,22 +18,11 @@ namespace Graph3D.Framework.Engines.RayEngines.Shapes {
             RayEngineMath.GetIntersections(ray, this, intersections);
         }
 
-        private readonly float _radius2;
-        public float Radius2 {
-            [DebuggerStepThrough]
-            get { return _radius2; }
-        }
-        
-        private readonly float _radius;
-        public float Radius {
-            [DebuggerStepThrough]
-            get { return _radius; }
-        }
+        public float Radius2 { get; }
 
-        private readonly Vector3D _position;
-        public Vector3D Position {
-            get { return _position; }
-        }
+        public float Radius { get; }
+
+        public Vector3D Position { get; }
 
     }
 }

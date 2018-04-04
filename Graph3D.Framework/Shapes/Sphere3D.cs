@@ -9,11 +9,11 @@ namespace Graph3D.Framework.Shapes {
             : this(new Vector3D(0, 0, 0)) {
         }
 
-        public Sphere3D(Vector3D position)
+        public Sphere3D(in Vector3D position)
             : this(position, 50) {
         }
 
-        public Sphere3D(Vector3D position, float radius)
+        public Sphere3D(in Vector3D position, float radius)
             : base(position) {
             Radius = radius;
         }

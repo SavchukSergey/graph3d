@@ -7,7 +7,7 @@ namespace Graph3D.Framework.Cameras {
             : this(new Vector3D(0, 0, 0)) {
         }
 
-        public GeneralCamera3D(Vector3D position) {
+        public GeneralCamera3D(in Vector3D position) {
             Position = position;
         }
 

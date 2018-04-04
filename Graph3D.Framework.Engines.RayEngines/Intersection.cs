@@ -1,64 +1,29 @@
-﻿using System.Diagnostics;
-using Graph3D.Framework.Engines.RayEngines.Shapes;
-using Graph3D.Framework.Math;
+﻿using Graph3D.Framework.Engines.RayEngines.Shapes;
 using Graph3D.Math;
 
 namespace Graph3D.Framework.Engines.RayEngines {
     public class Intersection {
 
         public Intersection(float textureU, float textureV, float textureW) {
-            this.textureU = textureU;
-            this.textureV = textureV;
-            this.textureW = textureW;
+            TextureU = textureU;
+            TextureV = textureV;
+            TextureW = textureW;
         }
 
-        private ColoredRay3D ray;
         //TODO: ray engine specifc
-        public ColoredRay3D Ray {
-            get { return ray; }
-            set { ray = value; }
-        }
+        public ColoredRay3D Ray { get; set; }
 
-        private Vector3D point;
-        public Vector3D Point {
-            get { return point; }
-            set { point = value; }
-        }
+        public Vector3D Point { get; set; }
 
-        private REBaseShape shape3D;
-        public REBaseShape Shape3D {
-            [DebuggerStepThrough]
-            get { return shape3D; }
-            [DebuggerStepThrough]
-            set { shape3D = value; }
-        }
+        public REBaseShape Shape3D { get; set; }
 
-        private float length;
-        public float Length {
-            get { return length; }
-            set { length = value; }
-        }
+        public float Length { get; set; }
 
-        private Vector3D normal;
-        public Vector3D Normal {
-            get { return normal; }
-            set { normal = value; }
-        }
+        public Vector3D Normal { get; set; }
 
-        private readonly float textureU;
-        public float TextureU {
-            get { return textureU; }
-        }
-
-        private readonly float textureV;
-        public float TextureV {
-            get { return textureV; }
-        }
-
-        private readonly float textureW;
-        public float TextureW {
-            get { return textureW; }
-        }
+        public float TextureU { get; }
+        public float TextureV { get; }
+        public float TextureW { get; }
 
     }
 }

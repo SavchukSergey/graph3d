@@ -15,18 +15,12 @@ namespace Graph3D.Framework.Engines.RayEngines {
             _context = context;
         }
 
-        private REBaseShape _decoratedShape;
-        public REBaseShape DecoratedShape {
-            get { return _decoratedShape; }
-        }
+        public REBaseShape DecoratedShape { get; private set; }
 
-        private REBaseLight _decoratedLight;
-        public REBaseLight DecoratedLight {
-            get { return _decoratedLight; }
-        }
+        public REBaseLight DecoratedLight { get; private set; }
 
-        private Vector3D ToAbsolute(Vector3D source) {
-            return _context.ToAbsolute(source);
+        private Vector3D ToAbsolute(in Vector3D source) {
+            return _context.ToAbsolute(in source);
         }
 
         #region IShape3DVisitor Members
@@ -92,7 +86,7 @@ namespace Graph3D.Framework.Engines.RayEngines {
         }
 
         public void Visit(CustomShape3D shape) {
-            _decoratedShape = null;
+            DecoratedShape = null;
         }
 
         public void Visit(Rectangle3D rect) {
@@ -102,7 +96,7 @@ namespace Graph3D.Framework.Engines.RayEngines {
                 C = ToAbsolute(rect.C),
                 Material = rect.Material
             };
-            _decoratedShape = new RERectangle(globalRectangle);
+            DecoratedShape = new RERectangle(globalRectangle);
         }
 
         public void Visit(Shape3DComposite composite) {
@@ -110,15 +104,15 @@ namespace Graph3D.Framework.Engines.RayEngines {
             var decorated = new REShapeComposite(composite);
             foreach (Shape3D child in composite) {
                 child.AcceptVisitor(this);
-                decorated.Add(_decoratedShape);
+                decorated.Add(DecoratedShape);
             }
             OptimizeComposite(decorated);
             _context.PopCoordinateSystem();
-            _decoratedShape = decorated;
+            DecoratedShape = decorated;
         }
 
         public void Visit(Sphere3D sphere) {
-            _decoratedShape = new RESphere(sphere);
+            DecoratedShape = new RESphere(sphere);
         }
 
         public void Visit(Triangle3D triangle) {
@@ -128,7 +122,7 @@ namespace Graph3D.Framework.Engines.RayEngines {
                 C = ToAbsolute(triangle.C),
                 Material = triangle.Material
             };
-            _decoratedShape = new RETriangle(globalTriangle);
+            DecoratedShape = new RETriangle(globalTriangle);
         }
 
         #endregion
@@ -145,14 +139,14 @@ namespace Graph3D.Framework.Engines.RayEngines {
             RELightComposite decorated = new RELightComposite(composite, _context.Scene);
             foreach (Light3D child in composite) {
                 child.AcceptVisitor(this);
-                decorated.Add(this._decoratedLight);
+                decorated.Add(this.DecoratedLight);
             }
             _context.PopCoordinateSystem();
-            _decoratedLight = decorated;
+            DecoratedLight = decorated;
         }
 
         public void Visit(OmniLight3D omni) {
-            _decoratedLight = new REOmniLight(omni, ToAbsolute(omni.Position), _context.Scene);
+            DecoratedLight = new REOmniLight(omni, ToAbsolute(omni.Position), _context.Scene);
         }
 
         #endregion

@@ -11,7 +11,7 @@ namespace Graph3D.Math {
         }
 
         [DebuggerStepThrough]
-        public Vector3D ToAbsolute(Vector3D vector) {
+        public Vector3D ToAbsolute(in Vector3D vector) {
             return vector.X * U + vector.Y * V + vector.Z * W + Position;
         }
 
@@ -47,7 +47,7 @@ namespace Graph3D.Math {
             return cs;
         }
 
-        public Vector3D ToRelative(Vector3D vector) {
+        public Vector3D ToRelative(in Vector3D vector) {
             var rel = vector - Position;
             var det = CalcDet();
             var detX = CalcDet(rel.X, V.X, W.X,
@@ -72,7 +72,7 @@ namespace Graph3D.Math {
             return res;
         }
 
-        public CoordinateSystem Translate(Vector3D delta) {
+        public CoordinateSystem Translate(in Vector3D delta) {
             Position += delta;
             return this;
         }
