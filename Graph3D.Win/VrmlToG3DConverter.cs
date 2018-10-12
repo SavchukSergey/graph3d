@@ -38,7 +38,7 @@ namespace Graph3D.Win {
         public Scene3D Convert(VrmlScene vrml) {
             Scene3D scene = new Scene3D();
             float[,] transformation = VrmlMath.GetUnitMatrix();
-            foreach (Node node in vrml.root.Children) {
+            foreach (Node node in vrml.Root.Children) {
                 List<Object3D> objs = ConvertNode(node, transformation);
                 foreach (Object3D obj in objs) {
                     if (obj != null) {
@@ -96,9 +96,9 @@ namespace Graph3D.Win {
         }
 
         private Shape3D ConvertShapeNode(ShapeNode node, float[,] transformation) {
-            AppearanceNode appearance = (AppearanceNode)node.Appearance.Node;
+            var appearance = node.Appearance;
             MaterialNode material = appearance.Material.Node as MaterialNode;
-            if (node.Geometry.Node is SphereNode sphereNode) {
+            if (node.Geometry is SphereNode sphereNode) {
                 var sphere = new Sphere3D {
                     //sphere.Position = new Graph3D.Framework.Math.Vector3D(0, 0, 0);
                     Radius = sphereNode.Radius.Value
@@ -106,17 +106,17 @@ namespace Graph3D.Win {
                 SetAppearance(sphere, appearance);
                 return sphere;
             }
-            if (node.Geometry.Node is BoxNode) {
+            if (node.Geometry is BoxNode) {
                 return null;
             }
-            if (node.Geometry.Node is IndexedFaceSetNode faceSetNode) {
+            if (node.Geometry is IndexedFaceSetNode faceSetNode) {
                 var composite = new Shape3DComposite();
                 int facesCount = 0;
-                for (int i = 0; i < faceSetNode.CoordIndex.length; i++) {
+                for (int i = 0; i < faceSetNode.CoordIndex.Length; i++) {
                     if (faceSetNode.CoordIndex[i] == -1) facesCount++;
                 }
                 var coords = ((CoordinateNode)faceSetNode.Coord.Node).Point;
-                for (int faceOffsetIndex = 0; faceOffsetIndex < faceSetNode.CoordIndex.length; faceOffsetIndex++) {
+                for (int faceOffsetIndex = 0; faceOffsetIndex < faceSetNode.CoordIndex.Length; faceOffsetIndex++) {
                     var triangle = new Triangle3D();
                     var a = coords[faceSetNode.CoordIndex[faceOffsetIndex]];
                     var b = coords[faceSetNode.CoordIndex[faceOffsetIndex + 1]];
@@ -150,11 +150,11 @@ namespace Graph3D.Win {
         }
 
         private Vector3D ConvertVector3D(SFVec3f vector) {
-            return new Vector3D(vector.x, vector.y, vector.z);
+            return new Vector3D(vector.X, vector.Y, vector.Z);
         }
 
         private Vector3D ConvertVector3D(SFVec3f vector, float[,] transformation) {
-            float[] transformed = VrmlMath.TransformVector(vector.x, vector.y, vector.z, transformation);
+            float[] transformed = VrmlMath.TransformVector(vector.X, vector.Y, vector.Z, transformation);
             return new Vector3D(transformed[0], transformed[1], transformed[2]);
         }
 

@@ -1,5 +1,4 @@
 ﻿using Graph3D.Drawing;
-using Graph3D.Framework.Drawing;
 using Graph3D.Framework.Shapes;
 
 namespace Graph3D.Framework.Engines.RayEngines.Shapes {
