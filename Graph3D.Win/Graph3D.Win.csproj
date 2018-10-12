@@ -55,9 +55,8 @@
     <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Graph3D.Vrml, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Graph3D.Vrml.1.0.1\lib\net40\Graph3D.Vrml.dll</HintPath>
+    <Reference Include="Graph3D.Vrml, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Graph3D.Vrml.2.0.0\lib\netstandard1.0\Graph3D.Vrml.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
