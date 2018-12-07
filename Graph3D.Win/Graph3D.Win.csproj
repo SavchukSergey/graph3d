@@ -121,6 +121,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BitmapBuilder.cs" />
+    <Compile Include="CanvasExt.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>

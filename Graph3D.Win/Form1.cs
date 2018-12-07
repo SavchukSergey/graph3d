@@ -24,13 +24,13 @@ namespace Graph3D.Win {
         private const int QUALITY = 500;
         private readonly Canvas _canvas = new Canvas(4 * QUALITY, 3 * QUALITY);
         private readonly Graph3DEngine _engine = new RayCastingEngine();
-        readonly System.Windows.Forms.Timer _timer = new System.Windows.Forms.Timer();
+        private readonly System.Windows.Forms.Timer _timer = new System.Windows.Forms.Timer();
 
         private void Form1_Load(object sender, EventArgs e) {
             _scene = new Scene3D();
             _scene = new VrmlToG3DConverter().Convert(@"D:\github\graph3D.vrml\Graph3D.Vrml.Test\Ant.wrl");
             _scene.Shapes.First().CoordinateSystem.Translate(new Vector3D(-0.2f, 0.3f, 0.2f)).Scale(2, 2, 2).RotateV(0.2f).RotateU(0.1f).Translate(new Vector3D(0, 0, -0.2f));
-            PreciseColor color = new PreciseColor(0.6f, 0.3f, 0.3f) * 0.8f;
+            var color = new PreciseColor(0.6f, 0.3f, 0.3f) * 0.8f;
             const float shininess = 0;
             var b = new Box3D {
                 Material = { DiffuseColor = color, Shininess = shininess },
@@ -73,12 +73,12 @@ namespace Graph3D.Win {
             //});
 
             const int omniCount = 5;
-            for (int i = 0; i < omniCount; i++) {
-                float angle = 2 * (float)System.Math.PI * i / omniCount;
+            for (var i = 0; i < omniCount; i++) {
+                var angle = 2 * (float)System.Math.PI * i / omniCount;
                 const float radius = 16;
-                float x = 0 + radius * (float)System.Math.Cos(angle);
-                float y = -19.5f;
-                float z = -7 + radius * (float)System.Math.Sin(angle);
+                var x = 0 + radius * (float)System.Math.Cos(angle);
+                var y = -19.5f;
+                var z = -7 + radius * (float)System.Math.Sin(angle);
                 _scene.Lights.Add(new OmniLight3D {
                     Position = new Vector3D(x, y, z),
                     Color = new PreciseColor(1.0f, 1.0f, 1.0f),
@@ -88,9 +88,9 @@ namespace Graph3D.Win {
 
         }
 
-        void timer_Tick(object sender, EventArgs e) {
+        private void timer_Tick(object sender, EventArgs e) {
             var builder = new BitmapBuilder();
-            Bitmap bmp = builder.BuildBitmap(_canvas, 1);
+            var bmp = builder.BuildBitmap(_canvas, 1);
             pictureBox1.Image = bmp;
 
             pictureBox1.Refresh();
@@ -111,7 +111,7 @@ namespace Graph3D.Win {
                 _canvas.Clear();
                 _engine.Render(_scene, camera, _canvas);
                 var builder = new BitmapBuilder();
-                Bitmap bmp = builder.BuildBitmap(_canvas, 1);
+                var bmp = builder.BuildBitmap(_canvas, 1);
                 bmp.Save(string.Format(@"d:\temp\result.png"), ImageFormat.Png);
             };
             start.BeginInvoke(null, null);

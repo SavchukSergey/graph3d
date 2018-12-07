@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using Graph3D.Drawing;
+using Graph3D.Win;
 
 namespace Graph3D.Framework.Drawing {
     public class BitmapBuilder {

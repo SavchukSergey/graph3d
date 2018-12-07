@@ -136,10 +136,10 @@ namespace Graph3D.Framework.Engines.RayEngines {
 
         public void Visit(Light3DComposite composite) {
             _context.PushCoordinateSystem(composite.CoordinateSystem);
-            RELightComposite decorated = new RELightComposite(composite, _context.Scene);
-            foreach (Light3D child in composite) {
+            var decorated = new RELightComposite(composite, _context.Scene);
+            foreach (var child in composite) {
                 child.AcceptVisitor(this);
-                decorated.Add(this.DecoratedLight);
+                decorated.Add(DecoratedLight);
             }
             _context.PopCoordinateSystem();
             DecoratedLight = decorated;
